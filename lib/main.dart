@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'view/landing_page.dart';
 
-main() => runApp(const HomeScreen());
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MaterialApp(
+    home: LandingPage(),
+  ));
+}
