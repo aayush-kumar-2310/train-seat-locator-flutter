@@ -3,7 +3,7 @@ import 'view/landing_page.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: LandingPage(),
   ));
 }

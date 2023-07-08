@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:train_seat_finder/home.dart';
+import 'package:train_seat_finder/helper.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -18,19 +18,24 @@ class _LandingPageState extends State<LandingPage> {
 
   Future scrollToItem() async {
     int jumpIndex = int.tryParse(_seatNumber.text) ?? 0;
-    showSnackbar(jumpIndex);
-    if (jumpIndex % 8 == 0) {
-      jumpIndex = (jumpIndex / 8).truncate() - 1;
+    if (jumpIndex <= 72) {
+      showSnackbar(jumpIndex);
+      if (jumpIndex % 8 == 0) {
+        jumpIndex = (jumpIndex / 8).truncate() - 1;
+      } else {
+        jumpIndex = (jumpIndex / 8).truncate();
+      }
+      setState(() {
+        coloredIndex = jumpIndex;
+      });
+      itemController.scrollTo(
+          index: jumpIndex,
+          alignment: 0.5,
+          duration: const Duration(milliseconds: 300));
     } else {
-      jumpIndex = (jumpIndex / 8).truncate();
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Enter a valid seat number!")));
     }
-    setState(() {
-      coloredIndex = jumpIndex;
-    });
-    itemController.scrollTo(
-        index: jumpIndex,
-        alignment: 0.5,
-        duration: const Duration(milliseconds: 300));
   }
 
   showSnackbar(seatNum) {
@@ -89,7 +94,7 @@ class _LandingPageState extends State<LandingPage> {
                 itemScrollController: itemController,
                 itemBuilder: ((context, index) {
                   return Container(
-                    margin: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         color: index == coloredIndex
                             ? Colors.cyanAccent
@@ -147,7 +152,7 @@ class _LandingPageState extends State<LandingPage> {
                               width: 40,
                               margin: const EdgeInsets.all(10),
                               color: Colors.redAccent.shade100,
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               child: InkWell(
                                 onTap: () => showSnackbar(_d + (8 * index)),
                                 child: Text(
@@ -180,7 +185,7 @@ class _LandingPageState extends State<LandingPage> {
                                   width: 40,
                                   margin: const EdgeInsets.all(10),
                                   color: Colors.lightGreenAccent.shade100,
-                                  padding: EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(5),
                                   child: InkWell(
                                     onTap: () => showSnackbar(_f + (8 * index)),
                                     child: Text(
@@ -193,7 +198,7 @@ class _LandingPageState extends State<LandingPage> {
                                   width: 40,
                                   margin: const EdgeInsets.all(10),
                                   color: Colors.orangeAccent.shade100,
-                                  padding: EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(5),
                                   child: InkWell(
                                     onTap: () => showSnackbar(_g + (8 * index)),
                                     child: Text(
@@ -208,7 +213,7 @@ class _LandingPageState extends State<LandingPage> {
                               width: 40,
                               margin: const EdgeInsets.all(10),
                               color: Colors.redAccent.shade100,
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               child: InkWell(
                                 onTap: () => showSnackbar(_h + (8 * index)),
                                 child: Text(
