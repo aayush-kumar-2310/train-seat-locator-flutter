@@ -87,7 +87,7 @@ class _LandingPageState extends State<LandingPage> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(bottom: 20),
+              padding: EdgeInsets.only(bottom: 15),
             ),
             Expanded(
               child: ScrollablePositionedList.builder(
@@ -106,10 +106,10 @@ class _LandingPageState extends State<LandingPage> {
                         Container(
                           width: MediaQuery.of(context).size.width * 0.9,
                           alignment: Alignment.center,
-                          child: Text("Row $index"),
                           decoration: BoxDecoration(
                               color: Colors.blue,
                               borderRadius: BorderRadius.circular(20)),
+                          child: Text("Row ${index + 1}"),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
