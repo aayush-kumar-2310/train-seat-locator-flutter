@@ -12,13 +12,13 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   int coloredIndex = -1;
-  int _a = 1, _b = 2, _c = 3, _d = 7, _e = 4, _f = 5, _g = 6, _h = 8;
+  final int _a = 1, _b = 2, _c = 3, _d = 7, _e = 4, _f = 5, _g = 6, _h = 8;
   final _seatNumber = TextEditingController();
   final itemController = ItemScrollController();
 
   Future scrollToItem() async {
     int jumpIndex = int.tryParse(_seatNumber.text) ?? 0;
-    if (jumpIndex <= 72) {
+    if (jumpIndex <= 72 && jumpIndex > 0) {
       showSnackbar(jumpIndex);
       if (jumpIndex % 8 == 0) {
         jumpIndex = (jumpIndex / 8).truncate() - 1;
@@ -33,6 +33,7 @@ class _LandingPageState extends State<LandingPage> {
           alignment: 0.5,
           duration: const Duration(milliseconds: 300));
     } else {
+      ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Enter a valid seat number!")));
     }
@@ -102,6 +103,14 @@ class _LandingPageState extends State<LandingPage> {
                         borderRadius: BorderRadius.circular(20)),
                     child: Column(
                       children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          alignment: Alignment.center,
+                          child: Text("Row $index"),
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
